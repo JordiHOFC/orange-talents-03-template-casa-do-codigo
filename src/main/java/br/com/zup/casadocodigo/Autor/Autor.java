@@ -18,7 +18,7 @@ public class Autor {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, length = 400)
@@ -35,7 +35,13 @@ public class Autor {
         this.criadoEm=LocalDateTime.now();
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "id=" + id +
+                ", nome='" + nome + '\'' +
+                ", descricao='" + descricao + '\'' +
+                '}';
     }
+
 }

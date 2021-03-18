@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.Autor;
 
+import br.com.zup.casadocodigo.handlers.EmailExistenteException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/autores")
@@ -22,11 +24,15 @@ public class AutorController {
 
 
     @PostMapping
-    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorForm autorForm, UriComponentsBuilder uriBuilder){
+    public ResponseEntity<?> cadastrarAutor(@RequestBody @Valid AutorForm autorForm, UriComponentsBuilder uriBuilder) throws EmailExistenteException {
+
+        Optional<Autor> emailExiste= autorRepository.findByEmail(autorForm.getEmail());
+        if(emailExiste.isPresent()){
+            throw new EmailExistenteException("Email já existente");
+        }
         Autor autor= autorForm.converter();
         Autor autorSalvo=autorRepository.save(autor);
-        URI uri=uriBuilder.path("/autores/{id}").buildAndExpand(autorSalvo.getId()).toUri();
-        return ResponseEntity.ok().location(uri).build();
+        return ResponseEntity.ok().body(autorSalvo.toString());
 
     }
 }
