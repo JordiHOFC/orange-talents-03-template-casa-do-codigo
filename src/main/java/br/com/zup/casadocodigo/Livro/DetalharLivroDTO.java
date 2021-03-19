@@ -1,9 +1,12 @@
 package br.com.zup.casadocodigo.Livro;
 
 import br.com.zup.casadocodigo.Autor.Autor;
+import br.com.zup.casadocodigo.Autor.AutorResponse;
 import br.com.zup.casadocodigo.Categoria.Categoria;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public class DetalharLivroDTO {
     private String titulo;
@@ -12,8 +15,10 @@ public class DetalharLivroDTO {
     private BigDecimal preco;
     private Integer numeroPaginas;
     private String isbn;
-    private Categoria categoria;
-    private Autor autor;
+    private String categoria;
+    private AutorResponse autor;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataLancamento;
 
     public DetalharLivroDTO(Livro livro) {
         this.titulo= livro.getTitulo();
@@ -22,8 +27,9 @@ public class DetalharLivroDTO {
         this.preco=livro.getPreco();
         this.numeroPaginas= livro.getNumeroPaginas();
         this.isbn= livro.getIsbn();
-        this.categoria= livro.getCategoria();
-        this.autor=livro.getAutor();
+        this.dataLancamento=livro.getDataLancamento();
+        this.categoria= livro.getCategoria().getNome();
+        this.autor=new AutorResponse(livro.getAutor());
     }
 
     public DetalharLivroDTO() {
@@ -53,11 +59,11 @@ public class DetalharLivroDTO {
         return isbn;
     }
 
-    public Categoria getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public Autor getAutor() {
+    public AutorResponse getAutor() {
         return autor;
     }
 
