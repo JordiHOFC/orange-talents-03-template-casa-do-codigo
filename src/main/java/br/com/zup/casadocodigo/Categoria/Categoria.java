@@ -3,7 +3,7 @@ package br.com.zup.casadocodigo.Categoria;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Entity
+@Entity(name = "categoria")
 @Table(name = "categoria")
 public class Categoria {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,6 +17,10 @@ public class Categoria {
     }
 
     public Categoria() {
+    }
+
+    public Categoria(Long id) {
+        this.id = id;
     }
 
     @Override

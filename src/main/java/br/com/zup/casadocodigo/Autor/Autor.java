@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
-@Entity
+@Entity(name = "autor")
 @Table(name = "autor")
 public class Autor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,6 +33,10 @@ public class Autor {
         this.email = email;
         this.descricao = descricao;
         this.criadoEm=LocalDateTime.now();
+    }
+
+    public Autor(Long id) {
+        this.id = id;
     }
 
     @Override

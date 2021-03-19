@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.handlers;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -16,7 +17,7 @@ import java.util.List;
 public class Handlers {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler({MethodArgumentNotValidException.class})
     public  List<ApiError> MethodArgumentNotValid(MethodArgumentNotValidException e){
         List<ApiError> dto=new ArrayList<>();
         List<FieldError> errors=e.getBindingResult().getFieldErrors();
