@@ -16,8 +16,8 @@ public class CategoriaController {
     }
 
     @PostMapping
-    public ResponseEntity<?> cadastrarCategoria(@RequestBody @Valid CategoriaForm categoriaForm){
-        Categoria categoria= categoriaForm.toModelo();
+    public ResponseEntity<?> cadastrarCategoria(@RequestBody @Valid CategoriaRequest categoriaRequest){
+        Categoria categoria= categoriaRequest.toModelo();
         categoriaRepository.save(categoria);
         return ResponseEntity.ok().body(categoria.toString());
     }

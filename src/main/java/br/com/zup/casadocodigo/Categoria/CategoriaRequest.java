@@ -5,17 +5,17 @@ import br.com.zup.casadocodigo.validators.UniqueValue;
 import javax.validation.constraints.NotBlank;
 
 
-public class CategoriaForm {
+public class CategoriaRequest {
 
     @NotBlank
     @UniqueValue(domainClass = Categoria.class,fieldName = "nome")
     private String nome;
 
-    public CategoriaForm(@NotBlank String nome) {
+    public CategoriaRequest(@NotBlank String nome) {
         this.nome = nome;
     }
 
-    public CategoriaForm() {
+    public CategoriaRequest() {
     }
 
     public Categoria toModelo(){
