@@ -1,6 +1,7 @@
 package br.com.zup.casadocodigo.Categoria;
 
 import br.com.zup.casadocodigo.validators.CategoriaExistenteValidator;
+import br.com.zup.casadocodigo.validators.NaoPermitirValoresDuplicadosValidator;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -12,17 +13,18 @@ import javax.validation.Valid;
 public class CategoriaController {
 
     private final CategoriaRepository categoriaRepository;
-    private final CategoriaExistenteValidator categoriaExistenteValidator;
+    private final NaoPermitirValoresDuplicadosValidator naoPermitirValoresDuplicadosValidator;
+
+    public CategoriaController(CategoriaRepository categoriaRepository, CategoriaExistenteValidator categoriaExistenteValidator, NaoPermitirValoresDuplicadosValidator naoPermitirValoresDuplicadosValidator) {
+        this.categoriaRepository = categoriaRepository;
+        this.naoPermitirValoresDuplicadosValidator = naoPermitirValoresDuplicadosValidator;
+    }
 
     @InitBinder
     public void init(WebDataBinder binder){
-        binder.addValidators(categoriaExistenteValidator);
+        binder.addValidators(naoPermitirValoresDuplicadosValidator);
     }
 
-    public CategoriaController(CategoriaRepository categoriaRepository, CategoriaExistenteValidator categoriaExistenteValidator) {
-        this.categoriaRepository = categoriaRepository;
-        this.categoriaExistenteValidator = categoriaExistenteValidator;
-    }
     @PostMapping
     public ResponseEntity<?> cadastrarCategoria(@RequestBody @Valid CategoriaForm categoriaForm){
         Categoria categoria= categoriaForm.toModelo();
