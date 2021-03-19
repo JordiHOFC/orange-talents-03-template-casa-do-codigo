@@ -23,7 +23,7 @@ public class CategoriaRepositoryTest {
     @Test
     public void testeCadastroDeCategoria(){
        Categoria categoria=new Categoria("Programação Orientada a Objetos");
-        Assert.assertEquals(1L, (long) repository.save(categoria).getId());
+        Assert.assertNotNull(repository.save(categoria));
     }
     public void testeBuscaCategoriaPeloNome(){
         Categoria categoria=new Categoria("Programação Orientada a Objetos");

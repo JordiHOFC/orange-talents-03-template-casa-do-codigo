@@ -21,7 +21,14 @@ public class AutorRepositoryTest {
     @Test
     public void testeCadastroDeAutor(){
         Autor autor = new Autor("Jordi","teste@teste.com","testando o repositorio");
-        Assert.assertEquals(1L, (long) repository.save(autor).getId());
+        Assert.assertNotNull(repository.save(autor));
+    }
+
+    @Test
+    public void testeBuscarPorEmail(){
+        Autor autor = new Autor("Jordi","teste@teste.com","testando o repositorio");
+        repository.save(autor);
+        Assert.assertNotNull(repository.findByEmail("teste@teste.com"));
     }
 
 
