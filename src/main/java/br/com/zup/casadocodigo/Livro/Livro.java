@@ -43,11 +43,11 @@ public class Livro {
     @Column(nullable = false)
     private LocalDate dataLancamento;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id",foreignKey = @ForeignKey(name = "categoria_id_fk"))
     private Categoria categoria;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "autor_id",foreignKey = @ForeignKey(name = "autor_id_fk"))
     private Autor autor;
 
@@ -75,6 +75,38 @@ public class Livro {
 
     public String getTitulo() {
         return titulo;
+    }
+
+    public String getSumario() {
+        return sumario;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public BigDecimal getPreco() {
+        return preco;
+    }
+
+    public Integer getNumeroPaginas() {
+        return numeroPaginas;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public LocalDate getDataLancamento() {
+        return dataLancamento;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public Autor getAutor() {
+        return autor;
     }
 
     @Override
