@@ -28,6 +28,15 @@ public class Estado {
     public Estado() {
     }
 
+    public Estado(Long estado) {
+        this.id=estado;
+    }
+
+    public Long getId() {
+        return id;
+    }
+    
+
     @Override
     public String toString() {
         return "Estado{" +

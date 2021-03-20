@@ -2,16 +2,12 @@ package br.com.zup.casadocodigo.Livro;
 
 import br.com.zup.casadocodigo.Autor.Autor;
 import br.com.zup.casadocodigo.Categoria.Categoria;
-import br.com.zup.casadocodigo.validators.DateFuture;
 import br.com.zup.casadocodigo.validators.ExistsRegister;
 import br.com.zup.casadocodigo.validators.UniqueValue;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -40,7 +36,7 @@ public class LivroRequest {
     private String isbn;
 
     @NotNull
-    @DateFuture
+    @Future
     @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate dataLancamento;
 
@@ -51,7 +47,7 @@ public class LivroRequest {
     @ExistsRegister(domainClass = Autor.class)
     private Long autor;
 
-    public LivroRequest(@NotBlank String titulo, @NotBlank String sumario, @NotBlank @Size(max = 500) String resumo, @Min(value = 20) @NotNull BigDecimal preco, @Min(value = 100) @NotNull Integer numeroPaginas, @NotBlank String isbn, LocalDate dataLancamento, @Valid Long categoria, @Valid Long autor) {
+    public LivroRequest(@NotBlank String titulo, @NotBlank String sumario, @NotBlank @Size(max = 500) String resumo, @Min(value = 20) @NotNull BigDecimal preco, @Min(value = 100) @NotNull Integer numeroPaginas, @NotBlank String isbn,@Future LocalDate dataLancamento, @Valid Long categoria, @Valid Long autor) {
         this.titulo = titulo;
         this.sumario = sumario;
         this.resumo = resumo;
