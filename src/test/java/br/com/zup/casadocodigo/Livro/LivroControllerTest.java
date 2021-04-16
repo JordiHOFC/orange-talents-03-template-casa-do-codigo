@@ -77,11 +77,8 @@ public class LivroControllerTest {
         LivroRequest request = new LivroRequest("cadastrando um livro", "sjasjioajs", "resumao da massa", new BigDecimal("22.3"), 110, "2312.3123.41222", LocalDate.parse("2021-04-21", DateTimeFormatter.ISO_LOCAL_DATE), categoria.getId(), autor.getId());
         Livro novoLivro= request.toModel();
         manager.persist(novoLivro);
-        //crio um livro dto
         DetalharLivroDTO response = new DetalharLivroDTO(novoLivro);
-        //crio um json do livro dto
         String responseJson= mapper.writeValueAsString(response);
-        //crio o enderdo do endpoint
         URI uri = UriComponentsBuilder.fromUriString("/livros/{id}").buildAndExpand(novoLivro.getId()).toUri();
 
         mockMvc.perform(MockMvcRequestBuilders.get(uri)).

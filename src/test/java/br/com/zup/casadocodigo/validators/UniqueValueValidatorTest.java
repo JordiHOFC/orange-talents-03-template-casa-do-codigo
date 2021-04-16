@@ -13,16 +13,12 @@ import org.mockito.Mockito;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import javax.transaction.Transactional;
 import javax.validation.*;
 
 import java.lang.annotation.Annotation;
-
-
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -47,13 +43,23 @@ public class UniqueValueValidatorTest {
 
     @Test
     @Transactional
-    public void deveRetornarUmErro(){
+    public void emailNaoDeveSerUnico(){
         autor=new AutorRequest("joao",",moreno alto bonito e sensual","jordi@gmail.com");
         manager.persist(autor.toModelo());
         String request="jordi@gmail.com";
         validator.initialize(testCase);
         boolean  exist=validator.isValid(request,ctx);
         Assert.assertFalse(exist);
+    }
+    @Test
+    @Transactional
+    public void emailDeveSerUnico(){
+        autor=new AutorRequest("joao",",moreno alto bonito e sensual","jordi@gmail.com");
+        manager.persist(autor.toModelo());
+        String request="joao@gmail.com";
+        validator.initialize(testCase);
+        boolean  exist=validator.isValid(request,ctx);
+        Assert.assertTrue(exist);
     }
 
 

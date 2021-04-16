@@ -10,8 +10,11 @@ import java.util.List;
 public class ExistsRegisterValidator implements ConstraintValidator<ExistsRegister,Object> {
 
     private Class<?> klazz;
-    @PersistenceContext
-    private EntityManager em;
+    private final EntityManager em;
+
+    public ExistsRegisterValidator(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public void initialize(ExistsRegister params) {
