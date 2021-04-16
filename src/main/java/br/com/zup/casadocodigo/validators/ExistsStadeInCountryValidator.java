@@ -22,10 +22,15 @@ public class ExistsStadeInCountryValidator implements ConstraintValidator<Exists
     private Long countryId;
     private Long stadeId;
 
-    @PersistenceContext
-    private EntityManager manager;
-    @Autowired
-    private EstadoRepository repository;
+
+    private final EntityManager manager;
+    private  final EstadoRepository repository;
+
+    public ExistsStadeInCountryValidator(EntityManager manager, EstadoRepository repository) {
+        this.manager = manager;
+        this.repository = repository;
+    }
+
 
     @Override
     public void initialize(ExistsStadeInCountry params) {
@@ -54,9 +59,8 @@ public class ExistsStadeInCountryValidator implements ConstraintValidator<Exists
             }
 
        }
+        return repository.findEstadoNoPais(countryId,stadeId).isPresent();
 
-      // boolean result=repository.findEstadoNoPais(countryId,stadeId);
-       return true;
 
 
     }

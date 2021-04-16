@@ -46,10 +46,9 @@ public class EstadoRepositoryTest {
         manager.persist(pais);
         Estado estado= new Estado("Minas Gerais",pais);
         manager.persist(estado);
-        Optional<Estado> optionalEstado=repository.findEstadoNoPais(pais.getId(), estado.getId());
-        Assert.assertTrue(optionalEstado.isPresent());
-        Assert.assertEquals(optionalEstado.get(),estado);
-        Assert.assertEquals(optionalEstado.get().getPais(),pais);
+         boolean pertence=repository.findEstadoNoPais(pais.getId(), estado.getId()).isPresent();
+        Assert.assertTrue(pertence);
+
     }
 
 }
