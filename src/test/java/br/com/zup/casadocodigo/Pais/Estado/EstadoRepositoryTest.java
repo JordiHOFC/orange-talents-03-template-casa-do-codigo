@@ -18,6 +18,7 @@ import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @DataJpaTest
@@ -38,6 +39,17 @@ public class EstadoRepositoryTest {
         Assert.assertNotNull(repository.save(estado));
     }
 
-
+    @Test
+    @Transactional
+    public void deveRetornarSeOEstadoPertenceAoPais(){
+        Pais pais= new Pais("Brasil");
+        manager.persist(pais);
+        Estado estado= new Estado("Minas Gerais",pais);
+        manager.persist(estado);
+        Optional<Estado> optionalEstado=repository.findEstadoNoPais(pais.getId(), estado.getId());
+        Assert.assertTrue(optionalEstado.isPresent());
+        Assert.assertEquals(optionalEstado.get(),estado);
+        Assert.assertEquals(optionalEstado.get().getPais(),pais);
+    }
 
 }

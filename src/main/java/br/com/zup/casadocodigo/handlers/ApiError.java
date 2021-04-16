@@ -1,12 +1,14 @@
 package br.com.zup.casadocodigo.handlers;
 
+import org.springframework.validation.FieldError;
+
 public class ApiError {
     private String campo;
     private String erro;
 
-    public ApiError(String campo, String erro) {
-        this.campo = campo;
-        this.erro = erro;
+    public ApiError(FieldError fieldError){
+        this.campo= fieldError.getField();
+        this.erro= fieldError.getDefaultMessage();
     }
 
     public ApiError() {

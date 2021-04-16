@@ -43,9 +43,9 @@ public class ExistsStadeInCountryValidator implements ConstraintValidator<Exists
 
        if (stadeId==null){
            String sql="select e from "+stade.getName()+" e where e.pais.id=:id";
-            Query query= manager.createQuery(sql);
-            query.setParameter("id",countryId);
-            List<?> result=query.getResultList();
+           Query query= manager.createQuery(sql);
+           query.setParameter("id",countryId);
+           List<?> result=query.getResultList();
             if (result.isEmpty()){
                 return true;
             }
@@ -55,8 +55,8 @@ public class ExistsStadeInCountryValidator implements ConstraintValidator<Exists
 
        }
 
-       Optional<Estado> result=repository.findEstadoNoPais(countryId,stadeId);
-       return result.isPresent();
+      // boolean result=repository.findEstadoNoPais(countryId,stadeId);
+       return true;
 
 
     }

@@ -1,11 +1,8 @@
 package br.com.zup.casadocodigo.Autor;
 
-import org.springframework.stereotype.Service;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
@@ -39,6 +36,10 @@ public class Autor {
         this.id = id;
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -47,13 +48,6 @@ public class Autor {
         return descricao;
     }
 
-    @Override
-    public String toString() {
-        return "Autor{" +
-                "id=" + id +
-                ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                '}';
-    }
+
 
 }

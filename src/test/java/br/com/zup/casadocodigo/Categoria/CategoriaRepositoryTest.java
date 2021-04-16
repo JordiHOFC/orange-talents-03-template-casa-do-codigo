@@ -25,10 +25,15 @@ public class CategoriaRepositoryTest {
        Categoria categoria=new Categoria("Programação Orientada a Objetos");
         Assert.assertNotNull(repository.save(categoria));
     }
-    public void testeBuscaCategoriaPeloNome(){
+    @Test
+    public void deveRetornarCategoriaPeloNome(){
         Categoria categoria=new Categoria("Programação Orientada a Objetos");
         repository.save(categoria);
-        Assert.assertNotNull(repository.findByNome("Programação Orientada a Objetos"));
+        Assert.assertEquals(repository.findByNome("Programação Orientada a Objetos").get().getNome(),"Programação Orientada a Objetos");
+    }
+    @Test
+    public void naoDeveRetornarCategoriaPeloNome(){
+        Assert.assertFalse(repository.findByNome("Programação Orientada a Objetos").isPresent());
     }
 
 

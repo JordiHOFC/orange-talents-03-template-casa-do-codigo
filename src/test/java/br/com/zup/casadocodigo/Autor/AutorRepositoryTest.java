@@ -25,10 +25,15 @@ public class AutorRepositoryTest {
     }
 
     @Test
-    public void testeBuscarPorEmail(){
+    public void naoDeveRetornaAutorPorEmail(){
+        Assert.assertTrue(repository.findByEmail("teste@teste.com").isEmpty());
+    }
+
+    @Test
+    public void deveRetornaAutorPorEmail(){
         Autor autor = new Autor("Jordi","teste@teste.com","testando o repositorio");
         repository.save(autor);
-        Assert.assertNotNull(repository.findByEmail("teste@teste.com"));
+        Assert.assertTrue(repository.findByEmail("teste@teste.com").isPresent());
     }
 
 

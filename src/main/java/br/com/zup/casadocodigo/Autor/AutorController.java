@@ -1,5 +1,6 @@
 package br.com.zup.casadocodigo.Autor;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -21,7 +22,7 @@ public class AutorController {
 
         Autor autor= autorRequest.toModelo();
         Autor autorSalvo=autorRepository.save(autor);
-        return ResponseEntity.ok().body(autorSalvo.toString());
+        return ResponseEntity.ok().body(new AutorResponse(autorSalvo));
 
     }
 }

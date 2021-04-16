@@ -1,7 +1,5 @@
 package br.com.zup.casadocodigo.validators;
 
-import org.springframework.util.Assert;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -10,6 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
 public class ExistsRegisterValidator implements ConstraintValidator<ExistsRegister,Object> {
+
     private Class<?> klazz;
     @PersistenceContext
     private EntityManager em;
@@ -27,7 +26,6 @@ public class ExistsRegisterValidator implements ConstraintValidator<ExistsRegist
          if(register.isEmpty()){
              return false;
          }
-
         return register.size()==1;
     }
 }

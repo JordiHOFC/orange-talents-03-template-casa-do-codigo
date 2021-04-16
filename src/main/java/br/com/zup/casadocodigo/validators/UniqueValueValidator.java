@@ -10,10 +10,14 @@ import javax.validation.ConstraintValidatorContext;
 import java.util.List;
 
 public class UniqueValueValidator implements ConstraintValidator<UniqueValue,Object> {
-    private String domainAtribute;
-    private Class<?> klass;
-    @PersistenceContext
-    private EntityManager em;
+    String domainAtribute;
+    Class<?> klass;
+
+    private final EntityManager em;
+
+    public UniqueValueValidator(EntityManager em) {
+        this.em = em;
+    }
 
     @Override
     public void initialize(UniqueValue params) {
@@ -23,10 +27,10 @@ public class UniqueValueValidator implements ConstraintValidator<UniqueValue,Obj
 
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
-        Query query=em.createQuery("select 1 from "+klass.getName()+" where "+domainAtribute+" = :value");
+        Query query=em.createQuery("select r from "+klass.getName()+" r where "+domainAtribute+" = :value");
         query.setParameter("value",o);
         List<?> results= query.getResultList();
-        Assert.state(results.size()<=1,"foi encontrado mais de um "+klass+"com este atributo "+domainAtribute+"igual a "+o);
+       Assert.state(results.size()<=1,"foi encontrado mais de um "+klass+"com este atributo "+domainAtribute+"igual a "+o);
         return results.isEmpty();
     }
 }

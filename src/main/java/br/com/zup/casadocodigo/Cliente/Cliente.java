@@ -1,18 +1,10 @@
 package br.com.zup.casadocodigo.Cliente;
 
-import br.com.zup.casadocodigo.Cliente.Groups.ClienteGroupSequence;
-import br.com.zup.casadocodigo.Cliente.Groups.PessoaFisica;
-import br.com.zup.casadocodigo.Cliente.Groups.PessoaJuridica;
+
 import br.com.zup.casadocodigo.Pais.Estado.Estado;
 import br.com.zup.casadocodigo.Pais.Pais;
-import org.hibernate.validator.constraints.br.CNPJ;
-import org.hibernate.validator.constraints.br.CPF;
-import org.hibernate.validator.group.GroupSequenceProvider;
-
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+
 
 @Entity(name = "cliente")
 @Table(name = "cliente")

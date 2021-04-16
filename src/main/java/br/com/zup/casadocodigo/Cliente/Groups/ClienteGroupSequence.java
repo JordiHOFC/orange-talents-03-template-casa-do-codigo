@@ -15,7 +15,6 @@ public class ClienteGroupSequence implements DefaultGroupSequenceProvider<Client
         if(cliente!=null){
             Integer pf=14;
             Integer pj=18;
-
             if(pf.equals(cliente.getDocumento().length())){
                 groups.add(PessoaFisica.class);
             }

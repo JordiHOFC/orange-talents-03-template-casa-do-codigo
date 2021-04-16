@@ -33,7 +33,6 @@ public class AutorControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post(uri).
                 content(json).
                 contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(200));
-
     }
     @Test
     public void deveRetorna400() throws Exception {
@@ -41,7 +40,7 @@ public class AutorControllerTest {
         URI uri=new URI("/autores");
         mockMvc.perform(MockMvcRequestBuilders.post(uri).
                 content(json).
-                contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(400));
+                contentType(MediaType.APPLICATION_JSON)).andExpect(MockMvcResultMatchers.status().is(400)).andReturn().getHandler();
 
     }
 }

@@ -12,7 +12,7 @@ public class AutorRequest {
     @NotBlank @Size(max = 400)
     private String descricao;
     @NotBlank @Email
-    @UniqueValue(domainClass = Autor.class,fieldName = "email")
+    @UniqueValue(domainClass = Autor.class, fieldName = "email")
     private String email;
 
     public AutorRequest(@NotBlank String nome, @NotBlank @Size(max = 400) String descricao, @NotBlank @Email String email) {
